@@ -1,0 +1,66 @@
+<!-- templates/base.html -->
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{% block title %}Lixchat{% endblock title %}</title>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{% static 'bootstrap-5.2.3-dist/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+        <link rel="stylesheet" href="{% static 'css/codepen-effects.css' %}">
+    </head>
+    <body style="background-color: #F5F5F5;">
+        <!-- Navbar -->
+        <header class="navbar navbar-expand-lg p-3 "> <!--  border-bottom shadow-sm--> 
+            <div class="container">
+                <a class="navbar-brand fw-bold text-secondary" href="{% url 'home' %}" style="color: #229799;">Lixchat</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a href="{% url 'article_new' %}" class="nav-link text-dark" style="color: #424242;">Add New Article</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'article_list' %}" class="nav-link text-dark" style="color: #424242;">Articles</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                    {% if user.is_authenticated %}
+                        <div class="dropdown">
+                            <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false" style="color: #229799;">
+                                {{ user.username }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end text-small shadow" aria-labelledby="dropdownUser1">
+                                <li><a class="dropdown-item" href="{% url 'password_change' %}">Change password</a></li>
+                                <li><a class="dropdown-item" href="{% url 'logout' %}">Log Out</a></li>
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            {% block content %}
+            {% endblock content %}
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer text-center"> <!--py-3 mt-5 border-top-->
+            <div class="container">
+                <span class="text-muted" style="color: #ffffff;">© 2024 Lixchat, All rights reserved.</span>
+            </div>
+        </footer>
+
+        <!-- Bootstrap JavaScript Bundle -->
+        <script src="{% static 'bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'js/scripts.js' %}"></script>
+    </body>
+</html>

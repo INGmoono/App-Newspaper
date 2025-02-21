@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Articles{% endblock title %}
+
+{% block content %}
+<div class="article-grid">
+    {% for article in article_list %}
+        <a href="{% url 'article_detail' article.pk %}" class="transparent-link">
+            <div class="card article-card" style="background-image: url('{{ article.image_url }}'); background-size: cover; background-position: center;">
+                <div class="blur-layer"></div>
+                <div class="card-overlay">
+                    <span class="overlay-text">click here to see information about {{ article.title }}</span>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+</div>
+{% endblock content %}

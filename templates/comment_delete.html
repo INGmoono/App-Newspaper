@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Comentario</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F5F5F5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .delete-comment-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border: 2px solid #48CFCB;
+            border-radius: 12px;
+            width: 600px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .delete-comment-title {
+            color: #424242;
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .delete-comment-text {
+            color: #424242;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .delete-comment-form {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .delete-comment-form button {
+            background-color: #48CFCB;
+            color: #ffffff;
+            border: none;
+            padding: 12px 20px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .delete-comment-form button:hover {
+            background-color: #229799;
+        }
+
+        .btn-cancel {
+            display: inline-block;
+            color: #229799;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .btn-cancel:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="delete-comment-container">
+        <h2 class="delete-comment-title">Eliminar comentario</h2>
+        <p class="delete-comment-text">¿Estás seguro de que deseas eliminar este comentario?</p>
+        <form method="post" class="delete-comment-form">
+            {% csrf_token %}
+            <button type="submit">Sí, eliminar</button>
+            <a href="{% url 'article_detail' object.article.pk %}" class="btn-cancel">Cancelar</a>
+        </form>
+    </div>
+</body>
+</html>

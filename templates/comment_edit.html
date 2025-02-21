@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Comentario</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F5F5F5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .edit-comment-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border: 2px solid #48CFCB;
+            border-radius: 12px;
+            width: 600px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .edit-comment-title {
+            color: #424242;
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .edit-comment-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .edit-comment-form input, 
+        .edit-comment-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .edit-comment-form button {
+            background-color: #48CFCB;
+            color: #ffffff;
+            border: none;
+            padding: 12px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .edit-comment-form button:hover {
+            background-color: #229799;
+        }
+
+        .btn-cancel {
+            display: block;
+            margin-top: 10px;
+            text-align: center;
+            color: #229799;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .btn-cancel:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="edit-comment-container">
+        <h2 class="edit-comment-title">Editar comentario</h2>
+        <form method="post" class="edit-comment-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Guardar</button>
+            <a href="{% url 'article_detail' object.article.pk %}" class="btn-cancel">Cancelar</a>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="article-detail-container">
+    <div class="article-header">
+        <h2>{{ object.title }}</h2>
+        <p class="article-meta">by {{ object.author }} | {{ object.date }}</p>
+    </div>
+
+    <div class="article-body">
+        <p>{{ object.body }}</p>
+    </div>
+
+    <div class="comments-section">
+        <hr>
+        <h4>Comments</h4>
+        {% for comment in comments %}
+            <div class="comment">
+                <p><strong>{{ comment.author }}</strong> &middot; {{ comment.comment }}</p>
+                {% if comment.author == request.user %}
+                    <a href="{% url 'comment_edit' comment.pk %}" class="btn-edit" >Edit</a>
+                    <a href="{% url 'comment_delete' comment.pk %}" class="btn-delete" >Delete</a>
+                {% endif %}
+            </div>
+        {% empty %}
+            <p>No comments yet.</p>
+        {% endfor %}
+    </div>
+
+    <div class="add-comment-section">
+        <hr>
+        <h4>Add a comment</h4>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button class="btn btn-comment" type="submit">Save</button>
+        </form>
+    </div>
+
+    <div class="article-actions">
+        <p>
+            <a href="{% url 'article_edit' object.pk %}" class="btn btn-edit">Edit</a> | 
+            <a href="{% url 'article_delete' object.pk %}" class="btn btn-delete">Delete</a>
+        </p>
+    </div>
+    
+    <p class="back-link">Back to <a href="{% url 'article_list' %}">All Articles</a>.</p>
+</div>
+{% endblock content %}
